@@ -24,9 +24,9 @@ export async function createNewEvent(event) {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(event),
+    body: JSON.stringify(event)
   });
   if (!response.ok) {
     const error = new Error('An error occurred while creating the event');
@@ -63,12 +63,17 @@ export async function fetchEvent({ signal, id }) {
 
   const { event } = await response.json();
 
-  return event;
+  const eventWithImage = {
+    ...event,
+    image: `http://localhost:3000/${event.image}`
+  };
+
+  return eventWithImage;
 }
 
 export async function deleteEvent({ id }) {
   const response = await fetch(`${url}/${id}`, {
-    method: 'DELETE',
+    method: 'DELETE'
   });
 
   if (!response.ok) {

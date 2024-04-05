@@ -5,12 +5,12 @@ import ErrorBlock from '../UI/ErrorBlock.jsx';
 import EventItem from './EventItem.jsx';
 import { fetchEvents } from '../../utils/http.js';
 
-export default function NewEventsSection() {
+export default function RecentEventsSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['events'],
     queryFn: fetchEvents,
     // recheck changes every 5 seconds, if true -> updates
-    staleTime: 1000 * 5,
+    staleTime: 1000 * 5
     // clear cache after 1 second (that forces refetch data) //default 5 minutes
     // gcTime: 1000,
   });
@@ -30,7 +30,6 @@ export default function NewEventsSection() {
       />
     );
   }
-
   if (data) {
     content = (
       <ul className="events-list">
