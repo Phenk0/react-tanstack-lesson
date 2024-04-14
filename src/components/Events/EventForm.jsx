@@ -9,7 +9,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
   const [selectedImage, setSelectedImage] = useState(inputData?.image);
   const { data, isError, error, isPending } = useQuery({
     queryKey: ['events-images'],
-    queryFn: fetchSelectedImages,
+    queryFn: fetchSelectedImages
   });
 
   function handleSelectImage(image) {
@@ -41,7 +41,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
       {isError && (
         <ErrorBlock
           title="Failed to load selectable images"
-          message="Please try again later"
+          message={error?.info.message || 'Please try again later'}
         />
       )}
       {data && (
@@ -95,7 +95,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
         />
       </p>
 
-      <p className="form-actions">{children}</p>
+      <div className="form-actions">{children}</div>
     </form>
   );
 }

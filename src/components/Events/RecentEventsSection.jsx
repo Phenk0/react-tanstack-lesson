@@ -7,8 +7,8 @@ import { fetchEvents } from '../../utils/http.js';
 
 export default function RecentEventsSection() {
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['events'],
-    queryFn: fetchEvents,
+    queryKey: ['events', { max: 3 }],
+    queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
     // recheck changes every 5 seconds, if true -> updates
     staleTime: 1000 * 5
     // clear cache after 1 second (that forces refetch data) //default 5 minutes
